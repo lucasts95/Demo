@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,7 +31,15 @@ public class UserInfoController {
 //    }
 
     @PostMapping("/selectById")
-    public RetResult<UserInfo> selectById(Integer id){
+    public RetResult<UserInfo> selectById(Integer id) {
+        UserInfo userInfo = userInfoService.selectById(id);
+        return RetResponse.makeOKRsp(userInfo);
+    }
+
+    @PostMapping("/testException")
+    public RetResult<UserInfo> testException(Integer id) {
+        List a = null;
+        a.size();
         UserInfo userInfo = userInfoService.selectById(id);
         return RetResponse.makeOKRsp(userInfo);
     }

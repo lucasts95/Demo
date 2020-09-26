@@ -4,6 +4,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.example.demo.core.ret.ServiceException;
 import com.example.demo.dao.UserInfoMapper;
 import com.example.demo.model.UserInfo;
 import com.example.demo.service.UserInfoService;
@@ -16,6 +17,10 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Override
     public UserInfo selectById(Integer id) {
-        return userInfoMapper.selectById(id);
+        UserInfo userInfo = userInfoMapper.selectById(id);
+        if (userInfo == null) {
+            throw new ServiceException("暂无该用户");
+        }
+        return userInfo;
     }
 }
